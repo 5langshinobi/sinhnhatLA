@@ -49,19 +49,11 @@ export default function AuthPage() {
   });
 
   const onLoginSubmit = (data: LoginData) => {
-    loginMutation.mutate(data, {
-      onSuccess: () => {
-        window.location.href = "/birthday";
-      }
-    });
+    loginMutation.mutate(data);
   };
 
   const onRegisterSubmit = (data: InsertUser) => {
-    registerMutation.mutate(data, {
-      onSuccess: () => {
-        window.location.href = "/birthday";
-      }
-    });
+    registerMutation.mutate(data);
   };
 
   return (

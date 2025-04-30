@@ -40,11 +40,13 @@ async function comparePasswords(supplied: string, stored: string) {
 export function setupAuth(app: Express) {
   const sessionSettings: session.SessionOptions = {
     secret: process.env.SESSION_SECRET || "lan-anh-birthday-2024",
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     store: storage.sessionStore,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+      sameSite: 'lax',
+      secure: false
     }
   };
 
@@ -104,7 +106,11 @@ export function setupAuth(app: Express) {
   });
 
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
-    res.status(200).json(req.user);
+    // Gửi dữ liệu người dùng như JSON và thêm url chuyển hướng
+    res.status(200).json({
+      user: req.user,
+      redirectUrl: "/birthday"
+    });
   });
 
   app.post("/api/logout", (req, res, next) => {
