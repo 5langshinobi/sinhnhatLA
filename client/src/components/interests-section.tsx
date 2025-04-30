@@ -100,6 +100,8 @@ export default function InterestsSection() {
           </Card>
         </div>
       </div>
+        </div>
+      </div>
     </div>
   );
 }
