@@ -106,11 +106,8 @@ export function setupAuth(app: Express) {
   });
 
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
-    // Gửi dữ liệu người dùng như JSON và thêm url chuyển hướng
-    res.status(200).json({
-      user: req.user,
-      redirectUrl: "/birthday"
-    });
+    // Thay vì trả về JSON, sử dụng chuyển hướng trực tiếp
+    res.redirect("/birthday");
   });
 
   app.post("/api/logout", (req, res, next) => {
