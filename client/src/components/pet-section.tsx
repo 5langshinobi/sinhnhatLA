@@ -28,11 +28,7 @@ export default function PetSection() {
               <h3 className="text-xl font-semibold">Về bé cưng của Lan Anh</h3>
             </div>
             <CardContent className="p-6">
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                Lan Anh có một người bạn nhỏ đặc biệt - một chú chó Chihuahua vô cùng đáng yêu và thông minh. 
-                Với đôi mắt to tròn, đôi tai dựng đứng và thân hình nhỏ nhắn, bé luôn là nguồn vui và niềm an ủi 
-                tuyệt vời trong cuộc sống hàng ngày.
-              </p>
+              
               
               <div className="space-y-4">
                 <div className="flex items-center space-x-2">
