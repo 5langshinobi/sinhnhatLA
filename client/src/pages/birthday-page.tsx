@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -9,13 +9,14 @@ import { format } from "date-fns";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import PhotoGallery from "@/components/photo-gallery";
+import UploadModal from "@/components/upload-modal";
 import { PhotoWithWishes } from "@shared/schema";
 
 export default function BirthdayPage() {
   const { user, logoutMutation } = useAuth();
   const { toast } = useToast();
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
   const today = new Date();
   const formattedDate = format(today, "dd/MM/yyyy");
   
@@ -78,20 +79,9 @@ export default function BirthdayPage() {
     }
   });
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    const file = files[0];
-    const formData = new FormData();
-    formData.append("image", file);
-
+  const handleUpload = (formData: FormData) => {
     setIsUploading(true);
     uploadMutation.mutate(formData);
-  };
-
-  const handleUploadClick = () => {
-    fileInputRef.current?.click();
   };
 
   const handleLogout = () => {
@@ -175,20 +165,12 @@ export default function BirthdayPage() {
               </div>
 
               <div className="mt-8">
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileChange}
-                  className="hidden"
-                  accept="image/*"
-                />
                 <Button
                   className="w-full py-6 bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:from-pink-600 hover:to-purple-600 transition-all flex items-center justify-center space-x-2 h-auto"
-                  onClick={handleUploadClick}
-                  disabled={isUploading}
+                  onClick={() => setShowUploadModal(true)}
                 >
                   <FaUpload className="mr-2" />
-                  <span>{isUploading ? "Đang tải lên..." : "Tải lên khoảnh khắc đẹp"}</span>
+                  <span>Thêm ảnh kỷ niệm mới</span>
                 </Button>
               </div>
             </motion.div>
@@ -253,6 +235,14 @@ export default function BirthdayPage() {
       <div className="absolute top-0 left-0 w-40 h-40 bg-pink-200 rounded-full opacity-50 blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-60 h-60 bg-blue-200 rounded-full opacity-50 blur-3xl translate-x-1/2 translate-y-1/2"></div>
       <div className="absolute top-1/3 right-1/4 w-20 h-20 bg-yellow-200 rounded-full opacity-50 blur-3xl"></div>
+      
+      {/* Upload Modal */}
+      <UploadModal
+        isOpen={showUploadModal}
+        onClose={() => setShowUploadModal(false)}
+        onUpload={handleUpload}
+        isUploading={isUploading}
+      />
     </div>
   );
 }
