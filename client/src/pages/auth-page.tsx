@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2 } from "lucide-react";
 import { FaUser, FaCalendarAlt, FaBirthdayCake, FaSeedling, FaGlassCheers, FaFire, FaClock } from "react-icons/fa";
+import ImageCarousel from "@/components/image-carousel";
 
 const loginSchema = insertUserSchema.pick({
   username: true,
@@ -83,11 +84,7 @@ export default function AuthPage() {
           {/* Left side - Birthday Image */}
           <div className="w-full md:w-1/2 p-6 bg-gradient-to-br from-pink-100 to-blue-100 relative">
             <div className="bg-white/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg">
-              <img
-                src="https://images.unsplash.com/photo-1616641679672-15b6a758d84c?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=80"
-                alt="Birthday celebration"
-                className="w-full h-64 object-cover"
-              />
+              <ImageCarousel />
               <div className="p-4">
                 <h2 className="text-2xl font-bold text-gray-800">Sinh nhật Lan Anh</h2>
                 <p className="text-gray-600 mt-1">Một trang web kỷ niệm đặc biệt những khoảnh khắc đáng nhớ</p>
@@ -173,7 +170,7 @@ export default function AuthPage() {
                               className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light"
                             />
                           </FormControl>
-                          <p className="text-xs text-gray-500 mt-1">Gợi ý: Ngày sinh của bạn (--/--/----)</p>
+                          <p className="text-xs text-gray-500 mt-1">Gợi ý: 01052004</p>
                           <FormMessage />
                         </FormItem>
                       )}
