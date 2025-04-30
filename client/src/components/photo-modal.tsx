@@ -3,8 +3,10 @@ import { PhotoWithWishes } from "@shared/schema";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { X } from "lucide-react";
+import { X, Heart, MessageCircle, Share2, Bookmark, ThumbsUp, Smile } from "lucide-react";
 import { format } from "date-fns";
+import { useAuth } from "@/hooks/use-auth";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface PhotoModalProps {
   photo: PhotoWithWishes;
@@ -14,12 +16,33 @@ interface PhotoModalProps {
 
 export default function PhotoModal({ photo, onClose, onAddWish }: PhotoModalProps) {
   const [wishText, setWishText] = useState("");
+  const { user } = useAuth();
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [likedComments, setLikedComments] = useState<number[]>([]);
 
   const handleAddWish = () => {
     if (wishText.trim()) {
       onAddWish(wishText);
       setWishText("");
     }
+  };
+
+  const toggleLikeComment = (wishId: number) => {
+    if (likedComments.includes(wishId)) {
+      setLikedComments(likedComments.filter(id => id !== wishId));
+    } else {
+      setLikedComments([...likedComments, wishId]);
+    }
+  };
+
+  // Get initials for avatar
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
   };
 
   return (
@@ -36,50 +59,140 @@ export default function PhotoModal({ photo, onClose, onAddWish }: PhotoModalProp
           </Button>
         </div>
         
-        <div className="overflow-auto flex-grow bg-gray-100">
+        {/* Photo viewing area */}
+        <div className="overflow-auto flex-grow bg-black">
           <img 
             src={photo.imageUrl} 
             alt={photo.title} 
-            className="w-full h-auto max-h-[70vh] object-contain bg-black/10"
+            className="w-full h-auto max-h-[70vh] object-contain"
           />
         </div>
         
-        <div className="p-6 bg-white">
-          <DialogHeader>
-            <DialogTitle className="text-xl">{photo.title}</DialogTitle>
-            <DialogDescription className="text-gray-600">{photo.description}</DialogDescription>
-          </DialogHeader>
+        {/* Content and comments area */}
+        <div className="bg-white flex flex-col h-[30vh] overflow-hidden">
+          {/* Photo info */}
+          <div className="p-4 border-b">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center space-x-2">
+                <Avatar className="h-10 w-10">
+                  <AvatarImage src="/avatar-placeholder.png" />
+                  <AvatarFallback className="bg-gradient-to-r from-pink-400 to-blue-400 text-white">
+                    {user ? getInitials(user.username) : "LA"}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-medium text-sm">{photo.title}</p>
+                  <p className="text-xs text-gray-500">{format(new Date(photo.createdAt), 'dd/MM/yyyy')}</p>
+                </div>
+              </div>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <Bookmark className="h-5 w-5" />
+              </Button>
+            </div>
+            
+            {/* Description */}
+            <p className="mt-2 text-sm text-gray-700">{photo.description}</p>
+            
+            {/* Action buttons */}
+            <div className="flex mt-3 border-t pt-3 justify-between">
+              <div className="flex space-x-2">
+                <Button variant="ghost" size="sm" className="flex items-center gap-1 text-xs">
+                  <ThumbsUp className="h-4 w-4" />
+                  Thích
+                </Button>
+                <Button variant="ghost" size="sm" className="flex items-center gap-1 text-xs">
+                  <MessageCircle className="h-4 w-4" />
+                  Bình luận
+                </Button>
+                <Button variant="ghost" size="sm" className="flex items-center gap-1 text-xs">
+                  <Share2 className="h-4 w-4" />
+                  Chia sẻ
+                </Button>
+              </div>
+              <div className="text-xs text-gray-500 flex items-center">
+                <Heart className="h-3 w-3 text-red-500 mr-1 fill-red-500" />
+                <span>{photo.wishes?.length || 0}</span>
+              </div>
+            </div>
+          </div>
           
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            {photo.wishes && photo.wishes.length > 0 && (
-              <div className="mb-4 max-h-32 overflow-y-auto">
+          {/* Comments section */}
+          <div className="flex-1 overflow-y-auto px-4 py-2">
+            {photo.wishes && photo.wishes.length > 0 ? (
+              <div className="space-y-4">
                 {photo.wishes.map((wish) => (
-                  <div key={wish.id} className="mb-2 p-2 bg-gray-50 rounded">
-                    <p className="text-sm text-gray-700">{wish.content}</p>
-                    <p className="text-xs text-gray-400 mt-1">
-                      {format(new Date(wish.createdAt), 'dd.MM.yyyy HH:mm')}
-                    </p>
+                  <div key={wish.id} className="flex gap-2">
+                    <Avatar className="h-8 w-8 flex-shrink-0">
+                      <AvatarFallback className="bg-gradient-to-r from-green-400 to-blue-400 text-white text-xs">
+                        {getInitials(wish.content.substring(0, 10))}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <div className="bg-gray-100 rounded-2xl px-3 py-2">
+                        <p className="font-medium text-xs">Khách</p>
+                        <p className="text-sm">{wish.content}</p>
+                      </div>
+                      <div className="flex items-center mt-1 text-xs text-gray-500 space-x-2">
+                        <button 
+                          onClick={() => toggleLikeComment(wish.id)}
+                          className={`font-medium ${likedComments.includes(wish.id) ? 'text-blue-500' : ''}`}
+                        >
+                          Thích
+                        </button>
+                        <button className="font-medium">Phản hồi</button>
+                        <span>{format(new Date(wish.createdAt), 'dd MMM')}</span>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
-            )}
-            
-            <div className="flex gap-4">
-              <div className="flex-grow">
-                <Textarea 
-                  value={wishText}
-                  onChange={(e) => setWishText(e.target.value)}
-                  placeholder="Thêm lời chúc của bạn..." 
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
-                  rows={2}
-                />
+            ) : (
+              <div className="text-center py-6 text-gray-500">
+                <p>Chưa có lời chúc nào. Hãy là người đầu tiên!</p>
               </div>
-              <div>
+            )}
+          </div>
+          
+          {/* Comment input */}
+          <div className="p-3 border-t flex items-center gap-2">
+            <Avatar className="h-8 w-8 flex-shrink-0">
+              <AvatarImage src="/avatar-placeholder.png" />
+              <AvatarFallback className="bg-gradient-to-r from-pink-400 to-blue-400 text-white">
+                {user ? getInitials(user.username) : "LA"}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex-1 flex bg-gray-100 rounded-full pr-2">
+              <input
+                type="text"
+                value={wishText}
+                onChange={(e) => setWishText(e.target.value)}
+                placeholder="Viết lời chúc của bạn..."
+                className="flex-1 bg-transparent border-none outline-none px-4 py-2 text-sm rounded-full"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleAddWish();
+                  }
+                }}
+              />
+              <div className="flex items-center">
                 <Button 
-                  onClick={handleAddWish}
-                  className="h-full bg-primary hover:bg-primary/90 text-white px-6 rounded-lg font-medium transition"
+                  type="button"
+                  variant="ghost" 
+                  size="icon"
+                  className="h-8 w-8 rounded-full"
+                  onClick={() => setShowEmojiPicker(!showEmojiPicker)}
                 >
-                  Thêm
+                  <Smile className="h-5 w-5 text-gray-500" />
+                </Button>
+                <Button 
+                  type="button"
+                  variant="ghost" 
+                  onClick={handleAddWish}
+                  className="text-primary"
+                  disabled={!wishText.trim()}
+                >
+                  Gửi
                 </Button>
               </div>
             </div>

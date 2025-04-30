@@ -6,8 +6,10 @@ import Fireworks from "@/components/fireworks";
 import { FaBirthdayCake, FaUpload, FaMusic, FaHeart, FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import PhotoGallery from "@/components/photo-gallery";
+import { PhotoWithWishes } from "@shared/schema";
 
 export default function BirthdayPage() {
   const { user, logoutMutation } = useAuth();
@@ -16,6 +18,11 @@ export default function BirthdayPage() {
   const [isUploading, setIsUploading] = useState(false);
   const today = new Date();
   const formattedDate = format(today, "dd/MM/yyyy");
+  
+  // Fetch photos from API
+  const { data: photos, isLoading: photosLoading } = useQuery<PhotoWithWishes[]>({
+    queryKey: ["/api/photos"],
+  });
   
   const uploadMutation = useMutation({
     mutationFn: async (formData: FormData) => {
@@ -36,6 +43,7 @@ export default function BirthdayPage() {
         variant: "default",
       });
       setIsUploading(false);
+      queryClient.invalidateQueries({ queryKey: ["/api/photos"] });
     },
     onError: (error: Error) => {
       toast({
@@ -45,6 +53,29 @@ export default function BirthdayPage() {
       });
       setIsUploading(false);
     },
+  });
+  
+  // Add wish mutation
+  const addWishMutation = useMutation({
+    mutationFn: async ({ photoId, wish }: { photoId: number; wish: string }) => {
+      const res = await apiRequest("POST", `/api/photos/${photoId}/wishes`, { content: wish });
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/photos"] });
+      toast({
+        title: "Gửi lời chúc thành công",
+        description: "Lời chúc của bạn đã được gửi!",
+        variant: "default",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Lỗi khi gửi lời chúc",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,6 +98,10 @@ export default function BirthdayPage() {
     if (logoutMutation) {
       logoutMutation.mutate();
     }
+  };
+  
+  const handleAddWish = (photoId: number, wish: string) => {
+    addWishMutation.mutate({ photoId, wish });
   };
 
   return (
@@ -171,22 +206,46 @@ export default function BirthdayPage() {
               
               {/* Vùng hiển thị hình ảnh */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Có thể thêm hình ảnh từ API ở đây */}
-                <div className="aspect-square rounded-lg overflow-hidden bg-pink-100 flex items-center justify-center">
-                  <FaUpload className="text-pink-300 text-4xl" />
-                </div>
-                <div className="aspect-square rounded-lg overflow-hidden bg-blue-100 flex items-center justify-center">
-                  <FaUpload className="text-blue-300 text-4xl" />
-                </div>
-                <div className="aspect-square rounded-lg overflow-hidden bg-purple-100 flex items-center justify-center">
-                  <FaUpload className="text-purple-300 text-4xl" />
-                </div>
-                <div className="aspect-square rounded-lg overflow-hidden bg-yellow-100 flex items-center justify-center">
-                  <FaUpload className="text-yellow-300 text-4xl" />
-                </div>
+                {photos && photos.length > 0 ? (
+                  // Hiển thị 4 ảnh đầu tiên nếu có
+                  photos.slice(0, 4).map(photo => (
+                    <div key={photo.id} className="aspect-square rounded-lg overflow-hidden bg-gray-100">
+                      <img 
+                        src={photo.imageUrl} 
+                        alt={photo.title} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))
+                ) : (
+                  // Hiển thị placeholder nếu không có ảnh
+                  <>
+                    <div className="aspect-square rounded-lg overflow-hidden bg-pink-100 flex items-center justify-center">
+                      <FaUpload className="text-pink-300 text-4xl" />
+                    </div>
+                    <div className="aspect-square rounded-lg overflow-hidden bg-blue-100 flex items-center justify-center">
+                      <FaUpload className="text-blue-300 text-4xl" />
+                    </div>
+                    <div className="aspect-square rounded-lg overflow-hidden bg-purple-100 flex items-center justify-center">
+                      <FaUpload className="text-purple-300 text-4xl" />
+                    </div>
+                    <div className="aspect-square rounded-lg overflow-hidden bg-yellow-100 flex items-center justify-center">
+                      <FaUpload className="text-yellow-300 text-4xl" />
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
           </div>
+        </div>
+        
+        {/* Phần gallery đầy đủ với khả năng thêm lời chúc */}
+        <div className="mt-16">
+          <PhotoGallery 
+            photos={photos || []} 
+            isLoading={photosLoading} 
+            onAddWish={handleAddWish}
+          />
         </div>
       </div>
 
