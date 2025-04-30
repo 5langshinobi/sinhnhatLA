@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PhotoWithWishes } from "@shared/schema";
 import { format } from "date-fns";
-import { Loader2, Search } from "lucide-react";
+import { Loader2, Search, ZoomIn } from "lucide-react";
 import PhotoModal from "./photo-modal";
 
 interface PhotoGalleryProps {
@@ -58,9 +58,9 @@ export default function PhotoGallery({ photos, isLoading, onAddWish }: PhotoGall
                       alt={photo.title} 
                       className="w-full h-64 object-cover transition group-hover:brightness-90"
                     />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                      <div className="bg-white/80 p-2 rounded-full">
-                        <Search className="text-primary h-5 w-5" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300">
+                      <div className="bg-white/80 p-2 rounded-full opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300">
+                        <ZoomIn className="text-primary h-5 w-5" />
                       </div>
                     </div>
                   </div>

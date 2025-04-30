@@ -50,11 +50,11 @@ export default function PhotoModal({ photo, onClose, onAddWish }: PhotoModalProp
         </div>
         
         {/* Photo viewing area */}
-        <div className="overflow-auto flex-grow bg-black">
+        <div className="overflow-auto flex-grow bg-black flex items-center justify-center">
           <img 
             src={photo.imageUrl} 
             alt={photo.title} 
-            className="w-full h-auto max-h-[70vh] object-contain"
+            className="w-full h-auto max-h-[70vh] object-contain transition-transform hover:scale-[1.02] cursor-zoom-in"
           />
         </div>
         
