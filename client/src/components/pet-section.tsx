@@ -189,14 +189,7 @@ export default function PetSection() {
           </div>
         </div>
         
-        <div className="mt-8 bg-white/80 backdrop-blur-sm rounded-xl p-6">
-          <h3 className="text-xl font-semibold mb-4 text-center">Chihuahua - Người bạn nhỏ, tình yêu lớn</h3>
-          <p className="text-center text-gray-700 max-w-3xl mx-auto">
-            Chihuahua tuy nhỏ bé nhưng luôn mang đến niềm vui và sự ấm áp vô bờ bến. Chúng không chỉ là thú cưng mà còn là 
-            thành viên đặc biệt trong gia đình, luôn sẵn sàng quan tâm và yêu thương vô điều kiện. 
-            Mỗi ngày với một chú Chihuahua là một ngày tràn đầy tiếng cười và những khoảnh khắc đáng yêu khó quên.
-          </p>
-        </div>
+        
       </div>
     </div>
   );
