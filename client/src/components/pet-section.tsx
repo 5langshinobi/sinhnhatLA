@@ -16,7 +16,7 @@ export default function PetSection() {
       <div className="container mx-auto">
         <h2 className="text-2xl font-bold text-center mb-8 flex items-center justify-center">
           <FaPaw className="text-amber-500 mr-2" size={20} />
-          Chihuahua - Người bạn nhỏ đáng yêu
+          Đây là con của cậu ấy (thú cưng)
           <Heart className="h-5 w-5 text-pink-500 ml-2" />
         </h2>
         

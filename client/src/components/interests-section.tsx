@@ -17,11 +17,12 @@ export default function InterestsSection() {
           <Card className="overflow-hidden bg-white/80 backdrop-blur-sm">
             <div className="p-4 border-b flex items-center">
               <Coffee className="h-5 w-5 text-amber-600 mr-2" />
-              <h3 className="text-xl font-semibold">Trà sữa</h3>
+              <h3 className="text-xl font-semibold">Đồ uống yêu thích</h3>
             </div>
             <CardContent className="p-4">
               <p className="text-gray-700 mb-4">
-                Trà sữa là một trong những đồ uống yêu thích của Lan Anh. Đặc biệt thích những loại trà sữa có vị ngọt nhẹ.
+                Đặc biệt thích trà sữa trân châu đường đen, trà đào. Ngoài ra còn thích uống milo, 
+                Brobio, đôi khi là bạc xỉu. Đặc biệt rất rất đặc biệt là bia (đồ uống yêu thích).
               </p>
               <div className="grid grid-cols-3 gap-2">
                 <img src="/milktea1.jpg" alt="Trà sữa" className="rounded-lg w-full h-32 object-cover" />
@@ -72,7 +73,7 @@ export default function InterestsSection() {
                   </p>
                 </div>
                 <div className="md:w-1/3">
-                  <img src="/flowers1.jpg" alt="Hoa" className="rounded-lg w-full h-60 object-cover" />
+                  <img src="/flower_and_nature.png" alt="Hoa và thiên nhiên" className="rounded-lg w-full h-auto object-cover" />
                 </div>
               </div>
             </CardContent>
