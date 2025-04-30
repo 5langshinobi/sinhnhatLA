@@ -1,5 +1,5 @@
 import React from "react";
-import { Sparkles, Heart, Coffee, Flower, ZoomIn } from "lucide-react";
+import { Sparkles, Heart, Coffee, ZoomIn } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useImageZoom } from "@/hooks/use-image-zoom";
 import ImageZoomModal from "@/components/image-zoom-modal";
@@ -81,35 +81,6 @@ export default function InterestsSection() {
                   <p><span className="font-medium">Nguyên tố:</span> Đất</p>
                   <p><span className="font-medium">Màu sắc:</span> Hồng, xanh dương</p>
                   <p><span className="font-medium">Hoa yêu thích:</span> Hoa hồng</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          {/* Flowers Section */}
-          <Card className="overflow-hidden bg-white/80 backdrop-blur-sm md:col-span-2">
-            <div className="p-4 border-b flex items-center">
-              <Flower className="h-5 w-5 text-rose-500 mr-2" />
-              <h3 className="text-xl font-semibold">Hoa & Thiên nhiên</h3>
-            </div>
-            <CardContent className="p-4">
-              <div className="flex flex-col md:flex-row gap-4">
-                <div className="md:w-2/3">
-                  <p className="text-gray-700 mb-4">
-                    Giống như nhiều người thuộc cung Kim Ngưu khác, Lan Anh yêu thích hoa và thiên nhiên. 
-                    Những bông hoa tươi đẹp luôn mang lại niềm vui và năng lượng tích cực. 
-                    Đặc biệt, hoa hồng với màu sắc rực rỡ và hương thơm dịu nhẹ là loài hoa Lan Anh yêu thích nhất.
-                  </p>
-                  <p className="text-gray-700">
-                    Sự nhẹ nhàng, tỉ mỉ và thẩm mỹ trong tính cách của Lan Anh phản ánh rõ nét qua việc yêu thích những điều tự nhiên và đẹp đẽ này.
-                  </p>
-                </div>
-                <div className="md:w-1/3 relative group cursor-pointer" 
-                    onClick={() => handleZoomImage("/z6557953645595_c0954f36cb2ee9cdfdd93179a2b25e82.jpg", "Hình của cậu ấy nèeeeee")}>
-                  <img src="/z6557953645595_c0954f36cb2ee9cdfdd93179a2b25e82.jpg" alt="Hình của cậu ấy nèeeeee" className="rounded-lg w-full h-auto object-cover" />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300 rounded-lg">
-                    <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
                 </div>
               </div>
             </CardContent>
