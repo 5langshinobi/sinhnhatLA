@@ -52,6 +52,9 @@ export default function HomePage() {
     return <Redirect to="/auth" />;
   }
   
+  // Redirect to birthday page
+  return <Redirect to="/birthday" />;
+  
   // Photos data
   const { data: photos, isLoading: photosLoading } = useQuery<PhotoWithWishes[]>({
     queryKey: ["/api/photos"],
