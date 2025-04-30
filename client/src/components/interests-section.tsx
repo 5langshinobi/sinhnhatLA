@@ -105,8 +105,8 @@ export default function InterestsSection() {
                   </p>
                 </div>
                 <div className="md:w-1/3 relative group cursor-pointer" 
-                    onClick={() => handleZoomImage("/z6557953645595_c0954f36cb2ee9cdfdd93179a2b25e82.jpg", "Bộ sưu tập kỉ niệm của Lan Anh")}>
-                  <img src="/z6557953645595_c0954f36cb2ee9cdfdd93179a2b25e82.jpg" alt="Bộ sưu tập kỉ niệm" className="rounded-lg w-full h-auto object-cover" />
+                    onClick={() => handleZoomImage("/z6557953645595_c0954f36cb2ee9cdfdd93179a2b25e82.jpg", "Hình của cậu ấy nèeeeee")}>
+                  <img src="/z6557953645595_c0954f36cb2ee9cdfdd93179a2b25e82.jpg" alt="Hình của cậu ấy nèeeeee" className="rounded-lg w-full h-auto object-cover" />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300 rounded-lg">
                     <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
