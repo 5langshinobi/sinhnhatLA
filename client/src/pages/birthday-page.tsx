@@ -190,36 +190,36 @@ export default function BirthdayPage() {
             >
               <h2 className="text-2xl font-semibold text-pink-500 mb-6">Bộ sưu tập kỷ niệm</h2>
               
-              {/* Vùng hiển thị hình ảnh */}
+              {/* Vùng hiển thị hình ảnh cố định */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {photos && photos.length > 0 ? (
-                  // Hiển thị 4 ảnh đầu tiên nếu có
-                  photos.slice(0, 4).map(photo => (
-                    <div key={photo.id} className="aspect-square rounded-lg overflow-hidden bg-gray-100">
-                      <img 
-                        src={photo.imageUrl} 
-                        alt={photo.title} 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ))
-                ) : (
-                  // Hiển thị placeholder nếu không có ảnh
-                  <>
-                    <div className="aspect-square rounded-lg overflow-hidden bg-pink-100 flex items-center justify-center">
-                      <FaUpload className="text-pink-300 text-4xl" />
-                    </div>
-                    <div className="aspect-square rounded-lg overflow-hidden bg-blue-100 flex items-center justify-center">
-                      <FaUpload className="text-blue-300 text-4xl" />
-                    </div>
-                    <div className="aspect-square rounded-lg overflow-hidden bg-purple-100 flex items-center justify-center">
-                      <FaUpload className="text-purple-300 text-4xl" />
-                    </div>
-                    <div className="aspect-square rounded-lg overflow-hidden bg-yellow-100 flex items-center justify-center">
-                      <FaUpload className="text-yellow-300 text-4xl" />
-                    </div>
-                  </>
-                )}
+                <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 shadow-md hover:shadow-lg transition-shadow">
+                  <img 
+                    src="/lan_anh1.jpg" 
+                    alt="Lan Anh tại quán cà phê" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 shadow-md hover:shadow-lg transition-shadow">
+                  <img 
+                    src="/lan_anh2.jpg" 
+                    alt="Lan Anh selfie" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 shadow-md hover:shadow-lg transition-shadow">
+                  <img 
+                    src="/lan_anh3.jpg" 
+                    alt="Lan Anh với hoa hồng" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 shadow-md hover:shadow-lg transition-shadow">
+                  <img 
+                    src="/lan_anh4.jpg" 
+                    alt="Lan Anh cùng bạn bè ở Đà Lạt" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </motion.div>
           </div>
