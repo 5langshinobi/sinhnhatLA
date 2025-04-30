@@ -1,5 +1,5 @@
 import React from "react";
-import { Heart, Star } from "lucide-react";
+import { Heart, Star, ZoomIn } from "lucide-react";
 import { FaPaw } from "react-icons/fa";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -9,8 +9,18 @@ import {
   CarouselNext,
   CarouselPrevious, 
 } from "@/components/ui/carousel";
+import { useImageZoom } from "@/hooks/use-image-zoom";
+import ImageZoomModal from "@/components/image-zoom-modal";
 
 export default function PetSection() {
+  const { 
+    isZoomed, 
+    zoomedImgSrc, 
+    zoomedImgAlt, 
+    handleZoomImage, 
+    handleCloseZoom 
+  } = useImageZoom();
+  
   return (
     <div className="py-8 px-4 bg-gradient-to-r from-pink-50 to-yellow-50">
       <div className="container mx-auto">
