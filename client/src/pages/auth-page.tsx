@@ -27,7 +27,7 @@ export default function AuthPage() {
 
   // Redirect if user is already logged in
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/birthday" />;
   }
 
   // Login form
@@ -49,11 +49,19 @@ export default function AuthPage() {
   });
 
   const onLoginSubmit = (data: LoginData) => {
-    loginMutation.mutate(data);
+    loginMutation.mutate(data, {
+      onSuccess: () => {
+        window.location.href = "/birthday";
+      }
+    });
   };
 
   const onRegisterSubmit = (data: InsertUser) => {
-    registerMutation.mutate(data);
+    registerMutation.mutate(data, {
+      onSuccess: () => {
+        window.location.href = "/birthday";
+      }
+    });
   };
 
   return (
