@@ -25,12 +25,7 @@ export default function FamilySection() {
           <FaHeart className="text-pink-600 ml-2" size={18} />
         </h2>
         
-        <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md mb-8">
-          <p className="text-center text-gray-700 max-w-3xl mx-auto italic">
-            "Gia đình là nơi tình yêu bắt đầu và không bao giờ kết thúc. Tình yêu thương, sự ủng hộ và những kỷ niệm 
-            đẹp từ gia đình là món quà quý giá nhất mà Lan Anh có được trong cuộc sống."
-          </p>
-        </div>
+        
         
         <div className="mt-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
