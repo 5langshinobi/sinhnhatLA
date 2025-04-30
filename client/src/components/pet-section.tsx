@@ -29,6 +29,14 @@ export default function PetSection() {
           Đây là con của cậu ấy (thú cưng)
           <Heart className="h-5 w-5 text-pink-500 ml-2" />
         </h2>
+
+        {/* Image Zoom Modal */}
+        <ImageZoomModal 
+          isOpen={isZoomed}
+          imgSrc={zoomedImgSrc}
+          alt={zoomedImgAlt}
+          onClose={handleCloseZoom}
+        />
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Phần thông tin về thú cưng */}
@@ -76,37 +84,53 @@ export default function PetSection() {
               <Carousel className="w-full">
                 <CarouselContent>
                   <CarouselItem>
-                    <div className="relative h-80 w-full rounded-xl overflow-hidden">
+                    <div className="relative h-80 w-full rounded-xl overflow-hidden cursor-pointer" 
+                         onClick={() => handleZoomImage("/dog1.jpg", "Cái tướng j đây - Lúc nào cũng chỉ thích ngủ")}>
                       <img src="/dog1.jpg" alt="Chihuahua đang ngủ" className="w-full h-full object-cover" />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
                         <p className="text-white text-sm">Cái tướng j đây - Lúc nào cũng chỉ thích ngủ</p>
                       </div>
+                      <div className="absolute top-2 right-2 bg-black/30 p-1 rounded-full">
+                        <ZoomIn className="h-5 w-5 text-white" />
+                      </div>
                     </div>
                   </CarouselItem>
                   
                   <CarouselItem>
-                    <div className="relative h-80 w-full rounded-xl overflow-hidden">
+                    <div className="relative h-80 w-full rounded-xl overflow-hidden cursor-pointer" 
+                         onClick={() => handleZoomImage("/dog2.jpg", "Kêu qua ko qua r g nhìn z - Bé ngoan đang nghỉ ngơi")}>
                       <img src="/dog2.jpg" alt="Chihuahua cuộn trong chăn" className="w-full h-full object-cover" />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
                         <p className="text-white text-sm">Kêu qua ko qua r g nhìn z - Bé ngoan đang nghỉ ngơi</p>
                       </div>
-                    </div>
-                  </CarouselItem>
-                  
-                  <CarouselItem>
-                    <div className="relative h-80 w-full rounded-xl overflow-hidden">
-                      <img src="/dog3.jpg" alt="Chihuahua sau khi tắm" className="w-full h-full object-cover" />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-                        <p className="text-white text-sm">Mới tắm xong nhìn tôi hả - Bé sạch sẽ thơm tho</p>
+                      <div className="absolute top-2 right-2 bg-black/30 p-1 rounded-full">
+                        <ZoomIn className="h-5 w-5 text-white" />
                       </div>
                     </div>
                   </CarouselItem>
                   
                   <CarouselItem>
-                    <div className="relative h-80 w-full rounded-xl overflow-hidden">
+                    <div className="relative h-80 w-full rounded-xl overflow-hidden cursor-pointer" 
+                         onClick={() => handleZoomImage("/dog3.jpg", "Mới tắm xong nhìn tôi hả - Bé sạch sẽ thơm tho")}>
+                      <img src="/dog3.jpg" alt="Chihuahua sau khi tắm" className="w-full h-full object-cover" />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                        <p className="text-white text-sm">Mới tắm xong nhìn tôi hả - Bé sạch sẽ thơm tho</p>
+                      </div>
+                      <div className="absolute top-2 right-2 bg-black/30 p-1 rounded-full">
+                        <ZoomIn className="h-5 w-5 text-white" />
+                      </div>
+                    </div>
+                  </CarouselItem>
+                  
+                  <CarouselItem>
+                    <div className="relative h-80 w-full rounded-xl overflow-hidden cursor-pointer" 
+                         onClick={() => handleZoomImage("/dog4.jpg", "Khoảnh khắc đáng yêu với người mẹ Lan Anh")}>
                       <img src="/dog4.jpg" alt="Lan Anh và Chihuahua" className="w-full h-full object-cover" />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
                         <p className="text-white text-sm">Khoảnh khắc đáng yêu với người mẹ Lan Anh</p>
+                      </div>
+                      <div className="absolute top-2 right-2 bg-black/30 p-1 rounded-full">
+                        <ZoomIn className="h-5 w-5 text-white" />
                       </div>
                     </div>
                   </CarouselItem>
@@ -116,10 +140,50 @@ export default function PetSection() {
               </Carousel>
               
               <div className="mt-6 grid grid-cols-4 gap-2">
-                <img src="/dog1.jpg" alt="Thumbnail" className="h-16 w-full object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity" />
-                <img src="/dog2.jpg" alt="Thumbnail" className="h-16 w-full object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity" />
-                <img src="/dog3.jpg" alt="Thumbnail" className="h-16 w-full object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity" />
-                <img src="/dog4.jpg" alt="Thumbnail" className="h-16 w-full object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity" />
+                <div className="relative group">
+                  <img 
+                    src="/dog1.jpg" 
+                    alt="Thumbnail" 
+                    className="h-16 w-full object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity" 
+                    onClick={() => handleZoomImage("/dog1.jpg", "Cái tướng j đây - Lúc nào cũng chỉ thích ngủ")}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 rounded-md">
+                    <ZoomIn className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
+                <div className="relative group">
+                  <img 
+                    src="/dog2.jpg" 
+                    alt="Thumbnail" 
+                    className="h-16 w-full object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity" 
+                    onClick={() => handleZoomImage("/dog2.jpg", "Kêu qua ko qua r g nhìn z - Bé ngoan đang nghỉ ngơi")}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 rounded-md">
+                    <ZoomIn className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
+                <div className="relative group">
+                  <img 
+                    src="/dog3.jpg" 
+                    alt="Thumbnail" 
+                    className="h-16 w-full object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity" 
+                    onClick={() => handleZoomImage("/dog3.jpg", "Mới tắm xong nhìn tôi hả - Bé sạch sẽ thơm tho")}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 rounded-md">
+                    <ZoomIn className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
+                <div className="relative group">
+                  <img 
+                    src="/dog4.jpg" 
+                    alt="Thumbnail" 
+                    className="h-16 w-full object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity" 
+                    onClick={() => handleZoomImage("/dog4.jpg", "Khoảnh khắc đáng yêu với người mẹ Lan Anh")}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 rounded-md">
+                    <ZoomIn className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
               </div>
             </Card>
           </div>

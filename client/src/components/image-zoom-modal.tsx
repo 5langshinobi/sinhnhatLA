@@ -1,9 +1,4 @@
 import React from "react";
-import { 
-  Dialog, 
-  DialogContent,
-  DialogOverlay
-} from "@/components/ui/dialog";
 import { X } from "lucide-react";
 
 interface ImageZoomModalProps {
@@ -14,24 +9,28 @@ interface ImageZoomModalProps {
 }
 
 export default function ImageZoomModal({ isOpen, imgSrc, alt, onClose }: ImageZoomModalProps) {
+  if (!isOpen) return null;
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogOverlay className="bg-black/80" />
-      <DialogContent className="sm:max-w-4xl border-none bg-transparent shadow-none p-0 flex items-center justify-center">
-        <div className="relative w-full h-full">
-          <button 
-            onClick={onClose}
-            className="absolute top-2 right-2 z-50 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full"
-          >
-            <X className="h-6 w-6" />
-          </button>
-          <img 
-            src={imgSrc} 
-            alt={alt} 
-            className="max-h-[80vh] max-w-full object-contain mx-auto rounded-lg" 
-          />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-all duration-300">
+      <div className="relative max-w-[90vw] max-h-[90vh] overflow-hidden">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+        >
+          <X className="h-6 w-6" />
+        </button>
+        
+        <img
+          src={imgSrc}
+          alt={alt}
+          className="max-w-full max-h-[85vh] object-contain rounded-lg"
+        />
+        
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+          <p className="text-white text-center font-medium">{alt}</p>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }

@@ -1,8 +1,18 @@
 import React from "react";
-import { Sparkles, Heart, Coffee, Flower } from "lucide-react";
+import { Sparkles, Heart, Coffee, Flower, ZoomIn } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useImageZoom } from "@/hooks/use-image-zoom";
+import ImageZoomModal from "@/components/image-zoom-modal";
 
 export default function InterestsSection() {
+  const { 
+    isZoomed, 
+    zoomedImgSrc, 
+    zoomedImgAlt, 
+    handleZoomImage, 
+    handleCloseZoom 
+  } = useImageZoom();
+  
   return (
     <div className="py-8 px-4 bg-gradient-to-r from-pink-100 to-blue-100">
       <div className="container mx-auto">
@@ -11,6 +21,14 @@ export default function InterestsSection() {
           Sở thích của Lan Anh
           <Sparkles className="h-6 w-6 text-primary ml-2" />
         </h2>
+        
+        {/* Image Zoom Modal */}
+        <ImageZoomModal 
+          isOpen={isZoomed}
+          imgSrc={zoomedImgSrc}
+          alt={zoomedImgAlt}
+          onClose={handleCloseZoom}
+        />
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Milk Tea Section */}
@@ -25,9 +43,24 @@ export default function InterestsSection() {
                 Brobio, đôi khi là bạc xỉu. Đặc biệt rất rất đặc biệt là bia (đồ uống yêu thích).
               </p>
               <div className="grid grid-cols-3 gap-2">
-                <img src="/milktea1.jpg" alt="Trà sữa" className="rounded-lg w-full h-32 object-cover" />
-                <img src="/milktea2.jpg" alt="Trà sữa" className="rounded-lg w-full h-32 object-cover" />
-                <img src="/milktea3.jpg" alt="Trà sữa" className="rounded-lg w-full h-32 object-cover" />
+                <div className="relative cursor-pointer group" onClick={() => handleZoomImage("/milktea1.jpg", "Trà sữa trân châu đường đen - Món khoái khẩu")}>
+                  <img src="/milktea1.jpg" alt="Trà sữa" className="rounded-lg w-full h-32 object-cover" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300 rounded-lg">
+                    <ZoomIn className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
+                <div className="relative cursor-pointer group" onClick={() => handleZoomImage("/milktea2.jpg", "Trà đào cam sả - Giải khát mùa hè")}>
+                  <img src="/milktea2.jpg" alt="Trà sữa" className="rounded-lg w-full h-32 object-cover" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300 rounded-lg">
+                    <ZoomIn className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
+                <div className="relative cursor-pointer group" onClick={() => handleZoomImage("/milktea3.jpg", "Bia - Đồ uống yêu thích đặc biệt")}>
+                  <img src="/milktea3.jpg" alt="Trà sữa" className="rounded-lg w-full h-32 object-cover" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300 rounded-lg">
+                    <ZoomIn className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -72,8 +105,12 @@ export default function InterestsSection() {
                     Sự nhẹ nhàng, tỉ mỉ và thẩm mỹ trong tính cách của Lan Anh phản ánh rõ nét qua việc yêu thích những điều tự nhiên và đẹp đẽ này.
                   </p>
                 </div>
-                <div className="md:w-1/3">
+                <div className="md:w-1/3 relative group cursor-pointer" 
+                    onClick={() => handleZoomImage("/flower_and_nature.png", "Hoa hồng - Loài hoa yêu thích của Lan Anh")}>
                   <img src="/flower_and_nature.png" alt="Hoa và thiên nhiên" className="rounded-lg w-full h-auto object-cover" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300 rounded-lg">
+                    <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
                 </div>
               </div>
             </CardContent>
