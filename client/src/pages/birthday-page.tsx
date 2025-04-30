@@ -12,6 +12,7 @@ import PhotoGallery from "@/components/photo-gallery";
 import UploadModal from "@/components/upload-modal";
 import InterestsSection from "@/components/interests-section";
 import FriendsGallery from "@/components/friends-gallery";
+import PetSection from "@/components/pet-section";
 import { PhotoWithWishes } from "@shared/schema";
 
 export default function BirthdayPage() {
@@ -231,6 +232,11 @@ export default function BirthdayPage() {
         {/* Phần gallery ảnh bạn bè */}
         <div className="mt-10">
           <FriendsGallery />
+        </div>
+        
+        {/* Phần về thú cưng */}
+        <div className="mt-10">
+          <PetSection />
         </div>
         
         {/* Phần gallery đầy đủ với khả năng thêm lời chúc */}
