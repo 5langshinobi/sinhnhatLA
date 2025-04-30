@@ -55,11 +55,11 @@ export default function PetSection() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="w-20 font-medium text-gray-700">Tính cách:</span>
-                  <span>Thông minh, trung thành, hay ngủ và vô cùng tình cảm</span>
+                  <span>chưa biết nhưng chắc là dễ thương, tăng động, tình cảm (tôi nghĩ thế)</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="w-20 font-medium text-gray-700">Sở thích:</span>
-                  <span>Ngủ nướng, được ôm ấp và khám phá mọi thứ xung quanh</span>
+                  <span>được ôm ấp</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="w-20 font-medium text-gray-700">Đặc điểm:</span>
