@@ -214,41 +214,71 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAllPhotosWithWishes(): Promise<PhotoWithWishes[]> {
-    const allPhotos = await db.select().from(photos).orderBy(photos.createdAt);
-    const allWishes = await db.select().from(wishes);
-    
-    return allPhotos.map(photo => {
-      const photoWishes = allWishes
-        .filter(wish => wish.photoId === photo.id)
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    try {
+      // Get all photos
+      const allPhotos = await db
+        .select()
+        .from(photos);
+        
+      // Get all wishes
+      const allWishes = await db.select().from(wishes);
       
-      return {
-        ...photo,
-        wishes: photoWishes
-      };
-    })
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      // Map photos to include wishes and sort by createdAt (newest first)
+      const result = allPhotos.map((photo) => {
+        const photoWishes = allWishes
+          .filter((wish) => wish.photoId === photo.id)
+          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        
+        return {
+          ...photo,
+          wishes: photoWishes
+        };
+      });
+      
+      // Sort by newest first
+      return result.sort((a, b) => 
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+    } catch (error) {
+      console.error("Error fetching photos with wishes:", error);
+      throw error;
+    }
   }
 
   async getPhotoById(id: number): Promise<Photo | undefined> {
-    const [photo] = await db.select().from(photos).where(eq(photos.id, id));
-    return photo;
+    try {
+      const [photo] = await db.select().from(photos).where(eq(photos.id, id));
+      return photo;
+    } catch (error) {
+      console.error(`Error fetching photo with id ${id}:`, error);
+      throw error;
+    }
   }
 
   async createPhoto(insertPhoto: InsertPhoto): Promise<Photo> {
-    const [photo] = await db
-      .insert(photos)
-      .values(insertPhoto)
-      .returning();
-    return photo;
+    try {
+      const [photo] = await db
+        .insert(photos)
+        .values(insertPhoto)
+        .returning();
+      return photo;
+    } catch (error) {
+      console.error("Error creating photo:", error);
+      throw error;
+    }
   }
 
   async addWishToPhoto(insertWish: InsertWish): Promise<Wish> {
-    const [wish] = await db
-      .insert(wishes)
-      .values(insertWish)
-      .returning();
-    return wish;
+    try {
+      const [wish] = await db
+        .insert(wishes)
+        .values(insertWish)
+        .returning();
+      return wish;
+    } catch (error) {
+      console.error(`Error adding wish to photo ${insertWish.photoId}:`, error);
+      throw error;
+    }
   }
 }
 
