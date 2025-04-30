@@ -12,21 +12,27 @@ export function ProtectedRoute({
   return (
     <Route path={path}>
       {() => {
-        const { user, isLoading } = useAuth();
+        // Đặt trong try-catch để bắt lỗi khi sử dụng useAuth
+        try {
+          const { user, isLoading } = useAuth();
 
-        if (isLoading) {
-          return (
-            <div className="flex items-center justify-center min-h-screen">
-              <Loader2 className="h-8 w-8 animate-spin text-border" />
-            </div>
-          );
-        }
+          if (isLoading) {
+            return (
+              <div className="flex items-center justify-center min-h-screen">
+                <Loader2 className="h-8 w-8 animate-spin text-border" />
+              </div>
+            );
+          }
 
-        if (!user) {
+          if (!user) {
+            return <Redirect to="/auth" />;
+          }
+
+          return <Component />;
+        } catch (error) {
+          console.error("Error in ProtectedRoute:", error);
           return <Redirect to="/auth" />;
         }
-
-        return <Component />;
       }}
     </Route>
   );

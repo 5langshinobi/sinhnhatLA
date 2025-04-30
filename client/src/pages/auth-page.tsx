@@ -21,21 +21,8 @@ const loginSchema = insertUserSchema.pick({
 type LoginData = z.infer<typeof loginSchema>;
 
 export default function AuthPage() {
-  // Get auth context safely
-  let user = null;
-  let loginMutation = null;
-  let registerMutation = null;
-  let isLoading = false;
-  
-  try {
-    const auth = useAuth();
-    user = auth.user;
-    loginMutation = auth.loginMutation;
-    registerMutation = auth.registerMutation;
-    isLoading = auth.isLoading;
-  } catch (error) {
-    console.error("Auth provider error:", error);
-  }
+  // Get auth context
+  const { user, loginMutation, registerMutation, isLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
 
   // Redirect if user is already logged in
@@ -62,19 +49,11 @@ export default function AuthPage() {
   });
 
   const onLoginSubmit = (data: LoginData) => {
-    if (loginMutation) {
-      loginMutation.mutate(data);
-    } else {
-      console.error("Login mutation not available");
-    }
+    loginMutation.mutate(data);
   };
 
   const onRegisterSubmit = (data: InsertUser) => {
-    if (registerMutation) {
-      registerMutation.mutate(data);
-    } else {
-      console.error("Register mutation not available");
-    }
+    registerMutation.mutate(data);
   };
 
   return (

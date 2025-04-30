@@ -6,6 +6,7 @@ import HomePage from "@/pages/home-page";
 import AuthPage from "@/pages/auth-page";
 import BirthdayPage from "@/pages/birthday-page";
 import { ProtectedRoute } from "@/lib/protected-route";
+import { AuthProvider } from "@/hooks/use-auth";
 
 function Router() {
   return (
@@ -22,7 +23,9 @@ function App() {
   return (
     <TooltipProvider>
       <Toaster />
-      <Router />
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
     </TooltipProvider>
   );
 }
