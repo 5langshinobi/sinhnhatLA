@@ -12,7 +12,7 @@ export default function InterestsSection() {
     handleZoomImage, 
     handleCloseZoom 
   } = useImageZoom();
-  
+
   return (
     <div className="py-8 px-4 bg-gradient-to-r from-pink-100 to-blue-100">
       <div className="container mx-auto">
@@ -21,15 +21,14 @@ export default function InterestsSection() {
           Sở thích của Lan Anh
           <Sparkles className="h-6 w-6 text-primary ml-2" />
         </h2>
-        
-        {/* Image Zoom Modal */}
+
         <ImageZoomModal 
           isOpen={isZoomed}
           imgSrc={zoomedImgSrc}
           alt={zoomedImgAlt}
           onClose={handleCloseZoom}
         />
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Milk Tea Section */}
           <Card className="overflow-hidden bg-white/80 backdrop-blur-sm">
@@ -64,7 +63,7 @@ export default function InterestsSection() {
               </div>
             </CardContent>
           </Card>
-          
+
           {/* Taurus Section */}
           <Card className="overflow-hidden bg-white/80 backdrop-blur-sm">
             <div className="p-4 border-b flex items-center">
@@ -86,27 +85,12 @@ export default function InterestsSection() {
               </div>
             </CardContent>
           </Card>
-          
-          
-                <div className="md:w-1/3 relative group cursor-pointer" 
-                    onClick={() => handleZoomImage("/flower_and_nature.png", "Hoa hồng - Loài hoa yêu thích của Lan Anh")}>
-                  <img src="/flower_and_nature.png" alt="Hoa và thiên nhiên" className="rounded-lg w-full h-auto object-cover" />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300 rounded-lg">
-                    <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
         </div>
       </div>
     </div>
   );
 }
 
-// Taurus Symbol Component
 function TaurusSymbol({ className }: { className?: string }) {
   return (
     <svg 
@@ -122,7 +106,6 @@ function TaurusSymbol({ className }: { className?: string }) {
   );
 }
 
-// Heart Icon Component
 function HeartIcon({ className }: { className?: string }) {
   return (
     <Heart className={className} fill="currentColor" />
