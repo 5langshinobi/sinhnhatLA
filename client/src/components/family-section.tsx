@@ -21,12 +21,12 @@ export default function FamilySection() {
       <div className="container mx-auto">
         <h2 className="text-2xl font-bold text-center mb-8 flex items-center justify-center">
           <FaHome className="text-pink-600 mr-2" size={20} />
-          Gia đình thân yêu
+          Gia đình của cậu ấy nèeeeee
           <FaHeart className="text-pink-600 ml-2" size={18} />
         </h2>
-        
-        
-        
+
+
+
         <div className="mt-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Ảnh gia đình 1 */}
@@ -38,7 +38,7 @@ export default function FamilySection() {
                   </div>
                 </div>
               </Card>
-              
+
               {/* Ảnh gia đình 2 */}
               <Card className="overflow-hidden bg-white/90 hover:shadow-lg transition-shadow">
                 <div className="aspect-square relative">
@@ -48,7 +48,7 @@ export default function FamilySection() {
                   </div>
                 </div>
               </Card>
-              
+
               {/* Ảnh gia đình 3 */}
               <Card className="overflow-hidden bg-white/90 hover:shadow-lg transition-shadow">
                 <div className="aspect-square relative">
@@ -58,7 +58,7 @@ export default function FamilySection() {
                   </div>
                 </div>
               </Card>
-              
+
               {/* Ảnh gia đình 4 */}
               <Card className="overflow-hidden bg-white/90 hover:shadow-lg transition-shadow">
                 <div className="aspect-square relative">
@@ -68,7 +68,7 @@ export default function FamilySection() {
                   </div>
                 </div>
               </Card>
-              
+
               {/* Ảnh gia đình 5 */}
               <Card className="overflow-hidden bg-white/90 hover:shadow-lg transition-shadow">
                 <div className="aspect-square relative">
@@ -78,7 +78,7 @@ export default function FamilySection() {
                   </div>
                 </div>
               </Card>
-              
+
               {/* Ảnh gia đình 6 */}
               <Card className="overflow-hidden bg-white/90 hover:shadow-lg transition-shadow">
                 <div className="aspect-square relative">
@@ -88,7 +88,7 @@ export default function FamilySection() {
                   </div>
                 </div>
               </Card>
-              
+
               {/* Ảnh gia đình 7 */}
               <Card className="overflow-hidden bg-white/90 hover:shadow-lg transition-shadow">
                 <div className="aspect-square relative">
@@ -98,7 +98,7 @@ export default function FamilySection() {
                   </div>
                 </div>
               </Card>
-              
+
               {/* Ảnh gia đình 8 */}
               <Card className="overflow-hidden bg-white/90 hover:shadow-lg transition-shadow">
                 <div className="aspect-square relative">
