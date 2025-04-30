@@ -10,6 +10,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import PhotoGallery from "@/components/photo-gallery";
 import UploadModal from "@/components/upload-modal";
+import InterestsSection from "@/components/interests-section";
+import FriendsGallery from "@/components/friends-gallery";
 import { PhotoWithWishes } from "@shared/schema";
 
 export default function BirthdayPage() {
@@ -221,8 +223,18 @@ export default function BirthdayPage() {
           </div>
         </div>
         
-        {/* Phần gallery đầy đủ với khả năng thêm lời chúc */}
+        {/* Phần sở thích và cung hoàng đạo */}
         <div className="mt-16">
+          <InterestsSection />
+        </div>
+        
+        {/* Phần gallery ảnh bạn bè */}
+        <div className="mt-10">
+          <FriendsGallery />
+        </div>
+        
+        {/* Phần gallery đầy đủ với khả năng thêm lời chúc */}
+        <div className="mt-10">
           <PhotoGallery 
             photos={photos || []} 
             isLoading={photosLoading} 
