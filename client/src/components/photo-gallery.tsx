@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PhotoWithWishes } from "@shared/schema";
 import { format } from "date-fns";
-import { Loader2, Search, Download } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import PhotoModal from "./photo-modal";
 
 interface PhotoGalleryProps {
@@ -67,13 +67,10 @@ export default function PhotoGallery({ photos, isLoading, onAddWish }: PhotoGall
                   <div className="p-4">
                     <h3 className="font-medium text-gray-800">{photo.title}</h3>
                     <p className="text-gray-600 text-sm mt-1">{photo.description}</p>
-                    <div className="flex justify-between items-center mt-3">
+                    <div className="flex justify-end mt-3">
                       <span className="text-xs text-gray-500">
                         {format(new Date(photo.createdAt), 'dd.MM.yyyy')}
                       </span>
-                      <button className="text-primary hover:text-primary/70">
-                        <Download className="h-4 w-4" />
-                      </button>
                     </div>
                   </div>
                 </div>
