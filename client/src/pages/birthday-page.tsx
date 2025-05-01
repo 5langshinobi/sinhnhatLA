@@ -148,10 +148,7 @@ export default function BirthdayPage() {
                     <FaHeart className="mr-2" /> Lời chúc đặc biệt
                   </h2>
                   <p className="text-gray-700 leading-relaxed">
-                    Chúc mừng sinh nhật Lan Anh! Hôm nay là ngày đặc biệt - ngày mà thế giới 
-                    đón chào một người tuyệt vời. Chúc bạn một sinh nhật tràn đầy niềm vui, 
-                    sự bình an và những điều kỳ diệu. Mỗi năm qua đi đều để lại những kỷ niệm đẹp 
-                    và mở ra chương mới tuyệt vời hơn trong cuộc sống của bạn.
+                    gửi bạn, chúc mừng sinh nhật bạn ,chúc bạn người đang từng ngày sống tích cực và mạnh mẽ hơn tuổi mới thành công luôn đạt được thứ mình mong muốn , chúc sức khỏe để có thể thực hiện được ước mơ của bản thân, chúc mọi thứ luôn suôn sẻ luôn thuận lợi, mong là cuộc sống này đối xử với bạn nhẹ nhàng hơn,mong những ước nguyện của bạn dù lớn hay nhỏ sẽ dần trở thành hiện thực theo 1 cách tự nhiên và êm đềm nhất,dù hơi muộn nhưng vẫn chúc bạn sinh nhật vui vẻ 😋
                   </p>
                 </div>
 
