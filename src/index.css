@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 330 100% 71%;
+  --primary-foreground: 355 100% 100%;
+  --secondary: 210 100% 56%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 60 100% 50%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 330 100% 71%;
+  --radius: 0.5rem;
+  
+  /* Colors for gradient backgrounds */
+  --primary-light: 350 100% 94%;
+  --primary-dark: 330 100% 71%;
+  --secondary-light: 195 53% 79%;
+  --secondary-dark: 210 100% 56%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 330 100% 71%;
+  --primary-foreground: 355 100% 100%;
+  --secondary: 210 100% 56%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 60 100% 50%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 330 100% 71%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-gradient-to-br from-pink-50 to-blue-50 text-foreground;
+  }
+}
+
+.gradient-bg {
+  @apply bg-gradient-to-br from-[#FFC0CB] via-[#FF69B4] to-[#87CEEB];
+}
+
+.btn-gradient {
+  @apply bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-all;
+}
+
+.tab-active {
+  @apply border-b-2 border-primary text-primary;
+}
+
+.firework {
+  @apply absolute rounded-full shadow-lg animate-explode;
+}
+
+.zoom-container:hover .zoom-icon {
+  @apply opacity-100;
+}
